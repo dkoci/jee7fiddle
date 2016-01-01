@@ -23,5 +23,7 @@ public class ServiceController {
 		IHelloService port = helloService.getHelloServicePort();
 		
 		System.out.println(port.sayHello("Davorin"));
+		
+		System.out.println("------------Konec klica vmesnika------------");
 	}
 }
