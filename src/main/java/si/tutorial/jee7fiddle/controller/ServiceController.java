@@ -5,6 +5,7 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
+import si.tutorial.jee7fiddle.ejb.OsebaEJB;
 import si.tutorial.jee7fiddle.logika.Logika;
 import si.tutorial.jee7fiddle.producerji.random.Random;
 import si.tutorial.jee7fiddle.producermethods.Avto;
@@ -13,8 +14,6 @@ import si.tutorial.jee7fiddle.producermethods.IVozilo;
 import si.tutorial.jee7fiddle.producermethods.Motor;
 import si.tutorial.jee7fiddle.simplegreeting.Greeting;
 import si.tutorial.jee7fiddle.simplegreeting.Informal;
-import si.tutorial.jee7fiddle.v1.helloservice.HelloService;
-import si.tutorial.jee7fiddle.v1.helloservice.IHelloService;
 
 @Model
 public class ServiceController {
@@ -55,17 +54,21 @@ public class ServiceController {
 	@Chosen
 	@RequestScoped
 	IVozilo vozilo;
+	
+	//JPA
+	@Inject
+	OsebaEJB osebaEJB;
 
 	public void doGetNames() {
 
 		logika.getNames().forEach(ime -> System.out.println(ime));
 
-		System.out.println("------------Klic vmesnika------------");
+		/*System.out.println("------------Klic vmesnika------------");
 
 		HelloService helloService = new HelloService();
 		IHelloService port = helloService.getHelloServicePort();
 
-		System.out.println(port.sayHello("Davorin"));
+		System.out.println(port.sayHello("Davorin"));*/
 
 		System.out.println("------------si.tutorial.jee7fiddle.simplegreeting------------");
 
@@ -82,5 +85,16 @@ public class ServiceController {
 		System.out.println("Izbrali smo: " + vozilo.getTipVozila());
 		System.out.println();
 		
+		System.out.println("------------JPA------------");
+		
+		System.out.println("Kreiramo novo Osebo");
+		osebaEJB.createOseba();
+		System.out.println();
+		
+	}
+	
+	public void doIzpisiOseboJpa() {
+		
+		osebaEJB.izpisiOsebe();
 	}
 }

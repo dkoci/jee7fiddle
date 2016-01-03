@@ -30,6 +30,19 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.6.2</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -49,35 +62,25 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<webResources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<targetPath>META-INF</targetPath>
+							<includes>
+								<include>persistence.xml</include>
+							</includes>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxws-maven-plugin</artifactId>
-				<version>2.4.1</version>
-				<executions>
-					<execution>
-						<id>hellosrv</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>wsimport</goal>
-						</goals>
-						<configuration>
-
-							<wsdlUrls>
-								<wsdlUrl>http://127.0.0.1:8080/jee7fiddle-0.0.1-SNAPSHOT/HelloService?wsdl</wsdlUrl>
-							</wsdlUrls>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<vmArgs>
-						<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
-					</vmArgs>
-				</configuration>
-			</plugin>
+			<!--plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxws-maven-plugin</artifactId> 
+				<version>2.4.1</version> <executions> <execution> <id>hellosrv</id> <phase>generate-sources</phase> 
+				<goals> <goal>wsimport</goal> </goals> <configuration> <wsdlUrls> <wsdlUrl>http://127.0.0.1:8080/jee7fiddle-0.0.1-SNAPSHOT/HelloService?wsdl</wsdlUrl> 
+				</wsdlUrls> </configuration> </execution> </executions> <configuration> <vmArgs> 
+				<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg> </vmArgs> </configuration> 
+				</plugin -->
 		</plugins>
 	</build>
 </project>
